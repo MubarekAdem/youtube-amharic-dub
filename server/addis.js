@@ -40,6 +40,15 @@ export async function translate(text, source = 'en') {
   return out;
 }
 
+export async function getVoices() {
+  const r = await fetch(BASE + '/api/v1/voice/voices', {
+    headers: { 'x-api-key': KEY },
+  });
+  if (!r.ok) throw new Error(`Addis Voices ${r.status}: ${await r.text()}`);
+  const j = await r.json();
+  return j.data || [];
+}
+
 // Addis AI limits concurrency to 1 generation at a time
 const MAX_TTS = Number(process.env.ADDIS_TTS_CONCURRENCY) || 1;
 let active = 0;

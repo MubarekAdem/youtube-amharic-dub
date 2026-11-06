@@ -495,13 +495,42 @@
     <!-- Voice Selection -->
     <div class="field-group" style="margin-top: 12px;">
       <div class="field-label">
-        <span>Dubbing Voice</span>
-        <span style="font-size: 10px; color: var(--accent);">Addis Voices 2</span>
+        <span>Dubbing Voice Character</span>
+        <span style="font-size: 10px; color: var(--accent);">Addis Voices 2 (19 Voices)</span>
       </div>
       <div class="input-wrapper">
-        <select id="voice-id" style="width: 100%; background: rgba(11, 15, 25, 0.85); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 8px 10px; color: #fff; font-size: 12px; outline: none; cursor: pointer;">
-          <option value="am-tewodros" selected>👨 ቴዎድሮስ (am-tewodros - Male)</option>
-          <option value="am-hamen">👩 ሃመን (am-hamen - Female)</option>
+        <select id="voice-id" style="width: 100%; background: rgba(11, 15, 25, 0.95); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 8px 10px; color: #fff; font-size: 12px; outline: none; cursor: pointer;">
+          <optgroup label="👨 Male Amharic Voices (ወንድ)">
+            <option value="am-tewodros" selected>👨 ቴዎድሮስ (Tewodros) — Energetic & Commercial</option>
+            <option value="am-simon">👨 ሲሞን (Simon) — Calm Storytelling</option>
+            <option value="am-nahom">👨 ናሆም (Nahom) — Deep Resonance</option>
+            <option value="am-amanuel">👨 አማኑኤል (Amanuel) — Soothing Narration</option>
+            <option value="am-yohanes-calm">👨 ዮሐንስ (Yohanes) — Low-key & Reflective</option>
+            <option value="am-tesfa">👨 ተስፋ (Tesfa) — Confident & Clear</option>
+            <option value="am-muaz">👨 ሙአዝ (Muaz) — Expressive Delivery</option>
+            <option value="am-roba">👨 ሮባ (Roba) — Bright Tone</option>
+            <option value="am-kaleb">👨 ካሌብ (Kaleb) — Suspenseful Storytelling</option>
+            <option value="am-dawit">👨 ዳዊት (Dawit) — Historical & Reflective</option>
+          </optgroup>
+          <optgroup label="👩 Female Amharic Voices (ሴት)">
+            <option value="am-hamen">👩 ሃመን (Hamen) — Warm Conversational & Podcast</option>
+            <option value="am-nejat">👩 ነጃት (Nejat) — Smooth Measured Elegance</option>
+            <option value="am-loza">👩 ሎዛ (Loza) — Studio Narration</option>
+            <option value="am-makda">👩 ማክዳ (Makda) — News & Journalistic</option>
+            <option value="am-feven">👩 ፌቨን (Feven) — Motivational & Empathetic</option>
+            <option value="am-melat">👩 ሜላት (Melat) — Relatable & Friendly</option>
+            <option value="am-meron">👩 ሜሮን (Meron) — Dramatic Storytelling</option>
+            <option value="am-dibora">👩 ዲቦራ (Dibora) — Educational & Coaching</option>
+            <option value="am-sara">👩 ሳራ (Sara) — Warm & Inspiring</option>
+          </optgroup>
+          <optgroup label="🇪🇹 Other Ethiopian Languages (ሌሎች ቋንቋዎች)">
+            <option value="om-diriba">ኦሮምኛ · Diriba (Afaan Oromoo Male)</option>
+            <option value="om-ayyaantuu">ኦሮምኛ · Ayyaantuu (Afaan Oromoo Female)</option>
+            <option value="ti-berhane">ትግርኛ · Berhane (Tigrinya Male)</option>
+            <option value="ti-senait">ትግርኛ · Senait (Tigrinya Female)</option>
+            <option value="sid-bereket">ሲዳምኛ · Bereket (Sidaamu Afoo Male)</option>
+            <option value="wal-tona">ወላይትኛ · Tona (Wolaytta Male)</option>
+          </optgroup>
         </select>
       </div>
     </div>

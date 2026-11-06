@@ -49,7 +49,9 @@ http.createServer(async (req, res) => {
     const b = JSON.parse(body || '{}');
     const text = cleanText(b.text);
     let out;
-    if (req.url === '/api/translate') {
+    if (req.url === '/api/voices') {
+      out = await cached('catalog:voices', () => addis.getVoices());
+    } else if (req.url === '/api/translate') {
       if (!text) return res.writeHead(200, { 'content-type': 'application/json' }).end(JSON.stringify({ text: '' }));
       out = await cached('tr:' + text, async () => ({ text: await addis.translate(text, b.source) }));
     } else if (req.url === '/api/tts') {
