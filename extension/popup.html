@@ -1,0 +1,567 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Amharic Dub Settings</title>
+  <style>
+    :root {
+      --bg-main: #090d16;
+      --bg-card: rgba(18, 24, 38, 0.85);
+      --bg-card-hover: rgba(26, 34, 52, 0.9);
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-focus: #10b981;
+      --accent: #10b981;
+      --accent-dark: #059669;
+      --accent-glow: rgba(16, 185, 129, 0.25);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --danger: #ef4444;
+      --blue: #3b82f6;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans Ethiopic", sans-serif;
+    }
+
+    body {
+      width: 360px;
+      background: var(--bg-main);
+      color: var(--text-main);
+      padding: 16px;
+      font-size: 13px;
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    /* Header */
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-badge {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 16px;
+      color: #fff;
+      box-shadow: 0 4px 14px var(--accent-glow);
+    }
+
+    .brand-text h1 {
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      background: linear-gradient(180deg, #ffffff 0%, #cbd5e1 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .brand-text p {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .live-status {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 8px;
+      border-radius: 9999px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+    }
+
+    .live-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--text-dim);
+    }
+
+    .live-status.online .live-dot {
+      background: var(--accent);
+      box-shadow: 0 0 8px var(--accent);
+    }
+    .live-status.online {
+      color: #34d399;
+      background: rgba(16, 185, 129, 0.1);
+      border-color: rgba(16, 185, 129, 0.25);
+    }
+
+    .live-status.offline .live-dot {
+      background: var(--danger);
+      box-shadow: 0 0 6px var(--danger);
+    }
+    .live-status.offline {
+      color: #f87171;
+      background: rgba(239, 68, 68, 0.1);
+      border-color: rgba(239, 68, 68, 0.25);
+    }
+
+    /* Cards */
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 12px 14px;
+      margin-bottom: 12px;
+      transition: border-color 0.2s;
+    }
+
+    .card:hover {
+      border-color: rgba(255, 255, 255, 0.12);
+    }
+
+    /* Master Toggle Row */
+    .toggle-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .toggle-info h2 {
+      font-size: 13px;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .toggle-info p {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 1px;
+    }
+
+    /* Switch */
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 44px;
+      height: 24px;
+      flex-shrink: 0;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      inset: 0;
+      background-color: #334155;
+      transition: .25s cubic-bezier(0.4, 0, 0.2, 1);
+      border-radius: 24px;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 18px;
+      width: 18px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: .25s cubic-bezier(0.4, 0, 0.2, 1);
+      border-radius: 50%;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    }
+
+    input:checked + .slider {
+      background-color: var(--accent);
+      box-shadow: 0 0 12px var(--accent-glow);
+    }
+
+    input:checked + .slider:before {
+      transform: translateX(20px);
+    }
+
+    /* Segmented Audio Mode Switcher */
+    .mode-section {
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .mode-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+    }
+
+    .segmented-control {
+      display: flex;
+      background: rgba(0, 0, 0, 0.4);
+      border-radius: 8px;
+      padding: 3px;
+      gap: 3px;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .seg-btn {
+      flex: 1;
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      padding: 6px 10px;
+      font-size: 12px;
+      font-weight: 500;
+      border-radius: 6px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .seg-btn:hover {
+      color: #fff;
+    }
+
+    .seg-btn.active.amh {
+      background: var(--accent-dark);
+      color: #fff;
+      font-weight: 600;
+      box-shadow: 0 2px 8px var(--accent-glow);
+    }
+
+    .seg-btn.active.orig {
+      background: var(--blue);
+      color: #fff;
+      font-weight: 600;
+      box-shadow: 0 2px 8px rgba(59, 130, 246, 0.35);
+    }
+
+    /* Form Fields */
+    .field-group {
+      margin-top: 8px;
+    }
+
+    .field-label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .input-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .input-wrapper input {
+      width: 100%;
+      background: rgba(11, 15, 25, 0.85);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 8px 10px;
+      color: #fff;
+      font-size: 12px;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .input-wrapper input:focus {
+      border-color: var(--border-focus);
+      box-shadow: 0 0 0 2px var(--accent-glow);
+    }
+
+    .input-wrapper input.with-btn {
+      padding-right: 36px;
+    }
+
+    .eye-btn {
+      position: absolute;
+      right: 6px;
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      padding: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 4px;
+    }
+
+    .eye-btn:hover {
+      color: #fff;
+    }
+
+    /* Volume Slider */
+    .slider-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    .slider-row input[type=range] {
+      flex: 1;
+      height: 4px;
+      border-radius: 2px;
+      background: #334155;
+      outline: none;
+      accent-color: var(--accent);
+      cursor: pointer;
+    }
+
+    .slider-val {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-muted);
+      width: 32px;
+      text-align: right;
+    }
+
+    /* Action Buttons */
+    .actions-row {
+      display: flex;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .btn {
+      border: none;
+      border-radius: 8px;
+      padding: 9px 14px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .btn-primary {
+      flex: 2;
+      background: linear-gradient(135deg, var(--accent-dark) 0%, var(--accent) 100%);
+      color: #fff;
+      box-shadow: 0 4px 12px var(--accent-glow);
+    }
+
+    .btn-primary:hover {
+      filter: brightness(1.08);
+      transform: translateY(-1px);
+    }
+
+    .btn-primary:active {
+      transform: translateY(0);
+    }
+
+    .btn-secondary {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--text-main);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    /* Test Result Banner */
+    .feedback-banner {
+      margin-top: 10px;
+      padding: 7px 10px;
+      border-radius: 8px;
+      font-size: 11px;
+      font-weight: 500;
+      display: none;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .feedback-banner.success {
+      display: flex;
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      color: #34d399;
+    }
+
+    .feedback-banner.error {
+      display: flex;
+      background: rgba(239, 68, 68, 0.12);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      color: #f87171;
+    }
+
+    .feedback-banner.testing {
+      display: flex;
+      background: rgba(59, 130, 246, 0.12);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      color: #60a5fa;
+    }
+
+    /* Footer */
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 12px;
+      padding-top: 10px;
+      border-top: 1px solid var(--border-subtle);
+      font-size: 11px;
+      color: var(--text-dim);
+    }
+
+    .footer a {
+      color: var(--text-muted);
+      text-decoration: none;
+    }
+    .footer a:hover {
+      color: var(--accent);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div class="header">
+    <div class="brand">
+      <div class="logo-badge">አማ</div>
+      <div class="brand-text">
+        <h1>Amharic Dub</h1>
+        <p>YouTube Voice Translator</p>
+      </div>
+    </div>
+    <div class="live-status" id="server-status">
+      <div class="live-dot"></div>
+      <span id="status-text">Checking...</span>
+    </div>
+  </div>
+
+  <!-- Master Toggle Card -->
+  <div class="card">
+    <div class="toggle-row">
+      <div class="toggle-info">
+        <h2>Auto-Dubbing</h2>
+        <p>Automatically voice videos in Amharic</p>
+      </div>
+      <label class="switch">
+        <input type="checkbox" id="enabled">
+        <span class="slider"></span>
+      </label>
+    </div>
+
+    <!-- Quick Audio Mode Switcher -->
+    <div class="mode-section">
+      <div class="mode-label">Active Audio Track</div>
+      <div class="segmented-control">
+        <button class="seg-btn amh active" id="btn-mode-amh" type="button">
+          <span>🔊</span> አማርኛ Dub
+        </button>
+        <button class="seg-btn orig" id="btn-mode-orig" type="button">
+          <span>🔈</span> Original
+        </button>
+      </div>
+    </div>
+
+    <!-- Voice Selection -->
+    <div class="field-group" style="margin-top: 12px;">
+      <div class="field-label">
+        <span>Dubbing Voice</span>
+        <span style="font-size: 10px; color: var(--accent);">Addis Voices 2</span>
+      </div>
+      <div class="input-wrapper">
+        <select id="voice-id" style="width: 100%; background: rgba(11, 15, 25, 0.85); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 8px 10px; color: #fff; font-size: 12px; outline: none; cursor: pointer;">
+          <option value="am-tewodros" selected>👨 ቴዎድሮስ (am-tewodros - Male)</option>
+          <option value="am-hamen">👩 ሃመን (am-hamen - Female)</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Connection & Server Card -->
+  <div class="card">
+    <div class="field-label">
+      <span>Backend Server URL</span>
+      <span style="font-size: 10px; color: var(--text-dim);">Local or Cloud</span>
+    </div>
+    <div class="input-wrapper">
+      <input type="text" id="backend" placeholder="http://localhost:8787" spellcheck="false">
+    </div>
+
+    <div class="field-group">
+      <div class="field-label">
+        <span>Access Token</span>
+        <span style="font-size: 10px; color: var(--text-dim);">x-token header</span>
+      </div>
+      <div class="input-wrapper">
+        <input type="password" id="token" class="with-btn" placeholder="Enter APP_TOKEN" spellcheck="false">
+        <button class="eye-btn" id="toggle-token-vis" type="button" title="Show/Hide Token">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+            <circle cx="12" cy="12" r="3"></circle>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="field-group" style="margin-top: 12px;">
+      <div class="field-label">
+        <span>Original Audio Volume</span>
+        <span id="duck-val-txt" class="slider-val">12%</span>
+      </div>
+      <div class="slider-row">
+        <input type="range" id="duck-vol" min="0" max="40" step="2" value="12">
+      </div>
+    </div>
+  </div>
+
+  <!-- Feedback Banner -->
+  <div class="feedback-banner" id="feedback">
+    <span id="feedback-icon">✓</span>
+    <span id="feedback-text">Settings saved</span>
+  </div>
+
+  <!-- Action Buttons -->
+  <div class="actions-row">
+    <button class="btn btn-secondary" id="test-btn" type="button">Test</button>
+    <button class="btn btn-primary" id="save-btn" type="button">Save Settings</button>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <span>Addis AI Voices 2</span>
+    <span>v0.2.0</span>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

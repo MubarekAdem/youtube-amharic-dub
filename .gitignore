@@ -1,0 +1,19 @@
+# Secrets and environment variables
+.env
+server/.env
+*.env
+
+# Cache and temporary generated files
+.cache/
+server/.cache/
+*.log
+raw-test.*
+
+# Dependencies
+node_modules/
+
+# OS / Editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
